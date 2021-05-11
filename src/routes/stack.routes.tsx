@@ -18,11 +18,9 @@ const AppRoutes: React.FC = () =>(
         <stackRoutes.Screen
         name='Welcome'
         component={Welcome}/>
-
         <stackRoutes.Screen
         name ='UserIdentification'
         component={UserIdentification}/>
-        
         <stackRoutes.Screen
         name='Confirmed'
         component={Confirmation}/>
