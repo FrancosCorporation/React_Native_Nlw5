@@ -6,6 +6,10 @@
 npm install --global expo-cli
 yarn add --global expo-cli
 
+*-- Criar Projeto  expo--*
+
+expo init React_Native_Nlw5
+
 *-- Install new icons from expo--*
 
 expo install @expo/vector-icons
@@ -22,6 +26,7 @@ expo install expo-app-loading
 
 yarn add @react-navigation/native
 yarn add @react-navigation/stack
+yarn add react-navigation
 
 *-- Install Expo Navigation--*
 

@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
-import { Image, View, Text, StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import { Image, View, Text, StyleSheet, Dimensions, SafeAreaView} from 'react-native';
 import colors from '../styles/colors';
 import wateringImg from '../assets/watering.png';
 import {Button} from '../components/Button';
-import fonts from '../styles/fonts'
+import fonts from '../styles/fonts';
 
 export function Welcome() {
     const [visible, setVisible] = useState(false);
-    function handleVisibility() {
+    const [ImageName, setVisibleName] = useState("Show");
+       function handleVisibility() {
         setVisible(!visible)
+        if(ImageName=='Show'){
+            setVisibleName('hide')
+        }
+        else setVisibleName('Show')
     }
-    
+        
     return (
         <SafeAreaView style={style.container}>
         <View style={style.wrapper}>
@@ -24,7 +29,8 @@ export function Welcome() {
         <Text style={style.subtitle}>
                 Este vai ser minha primeira vigarisse
         </Text >
-        <Button tittle="Mostrar" onPress={handleVisibility}/>
+        <Button title={ImageName} onPress={handleVisibility} />
+        <Button title="Next Page" way={'UserIdentification'}/>
        
         </View>
         </SafeAreaView>
@@ -57,6 +63,9 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: 'space-around',
         alignItems: 'center'
+    },
+    show:{
+        borderRadius: 16,
     }
 
 })

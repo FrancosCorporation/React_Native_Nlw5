@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Children } from 'react'
 import {
     StyleSheet,
     SafeAreaView,
@@ -9,13 +9,16 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button';
 import { Dimensions } from 'react-native';
+import Routes from '../routes/index';
 
 const Head = '😉';
 const tittleButton = 'Avançar';
 const tittle = 'Conseguimos !';
-const subtittle = 'Agora vamos começar a cuidar do cochilo !'
 
-export default function Confirmation() {
+
+
+export function Confirmation() {
+    const subtittle = 'Agora ' +   + ' vamos começar a cuidar do cochilo !'
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
@@ -29,7 +32,7 @@ export default function Confirmation() {
                     <Text style={styles.subtittle}>
                         {subtittle}
                     </Text>
-                    <Button tittle={tittleButton} style={styles.button} />
+                    <Button title={tittleButton} style={styles.button} />
                 </View>
             </View>
         </SafeAreaView>
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.heading,
         marginTop: 20
     },
-    subtittle:{
+    subtittle: {
         fontSize: 15,
         lineHeight: 32,
         textAlign: 'center',

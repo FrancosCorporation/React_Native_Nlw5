@@ -14,10 +14,10 @@ import { Button } from '../components/Button';
 import { Dimensions } from 'react-native';
 import { useState } from 'react';
 
-const Head = '😎';
+const Header = '😎';
 const titlleButton = 'Confirme';
 const titlle = 'Me conta \n seu nome?';
-export default function UserIdentification() {
+export function UserIdentification() {
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
     const [name, setName] = useState<string>();
@@ -30,7 +30,7 @@ export default function UserIdentification() {
         setIsFocused(true);
     }
     function handleImputChange(value: string) {
-        setIsFilled(!value);
+        setIsFilled(!!value);
         setName(value);
     }
 
@@ -40,18 +40,22 @@ export default function UserIdentification() {
                 <View style={styles.content}>
                     <View style={styles.form}>
                         <Text style={styles.emoji}>
-                            {isFilled ? { Head } : { Head }}
+                            {isFilled ?  Header  :  Header }
                         </Text>
                         <Text style={styles.tittle}>
                             {titlle}
                         </Text>
                         <TextInput
                             placeholder='Digite seu nome'
-                            style={[styles.input, (isFocused || isFilled) && { borderColor: colors.green }]}
+                            style={[
+                                styles.input, 
+                                (isFocused || isFilled) &&
+                                { borderColor: colors.green }
+                            ]}
                             onBlur={handleImputBlur}
                             onFocus={handleImputFocus}
                             onChangeText={handleImputChange} />
-                        <Button tittle={titlleButton} style={styles.button} />
+                        <Button title={titlleButton} style={styles.button} way='Confirmed' name={"rodolfo"} />
                     </View>
                 </View>
             </KeyboardAvoidingView>
