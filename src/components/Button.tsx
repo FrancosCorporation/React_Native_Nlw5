@@ -1,33 +1,20 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import colors from '../styles/colors'
 
 interface ButtonProps extends TouchableOpacityProps {
-    title: string;
-    way?: string;
-    onPress?: any;
-    name?: string;
+    titleButton: string;
 }
 
-export function Button({ title, name, way = '', onPress, ...rest }: ButtonProps) {
-    const navigation = useNavigation();
-    function handleStart() {
-        if (way != '') {
-            navigation.navigate({ name: way, params: { name: name } });
-        }
-        else {
-            onPress()
-        }
-    }
+export function Button({ titleButton, ...rest }: ButtonProps) {
     return (
         <TouchableOpacity
             style={style.button}
             activeOpacity={0.7}
-            {...rest}
-            onPress={handleStart} >
+            {...rest}>
             <Text style={style.buttonText}>
-                {title}
+                {titleButton}
             </Text>
         </TouchableOpacity>
     )
@@ -39,7 +26,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 16,
         marginBottom: 10,
-        height: 56,
+        height: 70,
         paddingHorizontal: 10
     },
     buttonText: {

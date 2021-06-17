@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     StyleSheet,
     SafeAreaView,
@@ -9,30 +9,63 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button';
 import { Dimensions } from 'react-native';
-import Routes from '../routes/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
-const Head = '😉';
-const tittleButton = 'Avançar';
-const tittle = 'Conseguimos !';
+
+interface Params {
+    title: string;
+    subtitle: string;
+    titleButton: string;
+    icon: 'smile' | 'hub';
+    nextScreen: string;
+}
+const emojis = {
+    hub: '😉',
+    smile: '😍',
+}
 
 
 
 export function Confirmation() {
-    const subtittle = 'Agora ' +   + ' vamos começar a cuidar do cochilo !'
+    const navigation = useNavigation();
+    const routes = useRoute();
+    const {
+        title,
+        subtitle,
+        titleButton,
+        icon,
+    } = routes.params as Params;
+
+    const [userName, setUserName] = useState<string>('');
+
+    useEffect(() => {
+        async function loadStorageUserName() {
+            const user = await AsyncStorage.getItem('@react_native_nlw5:user');
+            setUserName(user || '');
+        }
+        loadStorageUserName();
+    }, []);
+
+    function targeting() {
+        navigation.navigate('PlantSelect');
+    }
+
+    
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.form}>
                     <Text style={styles.emoji}>
-                        {Head}
+                        {emojis[icon]}
                     </Text>
                     <Text style={styles.tittle}>
-                        {tittle}
+                        {title}
                     </Text>
                     <Text style={styles.subtittle}>
-                        {subtittle}
+                        {subtitle}
                     </Text>
-                    <Button title={tittleButton} style={styles.button} />
+                    <Button titleButton={titleButton} style={styles.button} onPress={targeting} />
                 </View>
             </View>
         </SafeAreaView>

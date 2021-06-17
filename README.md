@@ -32,6 +32,41 @@ yarn add react-navigation
 
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
-
 *-- Reset Metro's cache --*
 yarn start --reset-cache
+
+*-- Install Axios --*
+yarn add axios
+
+*-- Install Json-Server --*
+npm install -g json-server
+
+*-- Command Json-Server start --*
+json-server .\src\services\server.json --host 192.168.0.130 --port 3333
+
+*-- Install Expo Svg convert --*
+
+expo install react-native-svg
+
+*-- Install Expo Lottie animations --*
+
+expo install lottie-react-native
+
+*-- Install Expo async Storage --*
+
+expo install @react-native-async-storage/async-storage
+
+*-- Install Expo Date Timer Picker --*
+
+expo install @react-native-community/datetimepicker
+
+*-- Install Expo Date FNS Validation Date pass --*
+
+yarn add date-fns
+
+*-- Install Tab navigation --*
+
+yarn add @react-navigation/bottom-tabs
+
+*-- Install Expo Notification --*
+expo install expo-notifications

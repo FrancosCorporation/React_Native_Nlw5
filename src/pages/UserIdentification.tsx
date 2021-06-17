@@ -6,25 +6,30 @@ import {
     Text,
     TextInput,
     KeyboardAvoidingView,
-    Platform
+    Platform,
+    Alert
 } from 'react-native';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button';
 import { Dimensions } from 'react-native';
 import { useState } from 'react';
+import AsynStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/core';
 
 const Header = '😎';
 const titlleButton = 'Confirme';
 const titlle = 'Me conta \n seu nome?';
 export function UserIdentification() {
+    const navigation = useNavigation();
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
-    const [name, setName] = useState<string>();
+    const [name, setName] = useState<string>('');
+
 
     function handleImputBlur() {
         setIsFocused(false);
-        setIsFilled(!name)
+        setIsFilled(!!name)
     }
     function handleImputFocus() {
         setIsFocused(true);
@@ -33,6 +38,23 @@ export function UserIdentification() {
         setIsFilled(!!value);
         setName(value);
     }
+    async function setNameUser() {
+        try {
+            if(name!=''){
+                await AsynStorage.setItem('@react_native_nlw5:user', name);
+                navigation.navigate('Confirmed',{
+                    title:"Prontinho \n"+name,
+                    icon:'hub',
+                    subtitle:"Então agora vamos começar a cadastrar as plantinhas",
+                    titleButton:'Mãos a obra'
+                });
+            }
+            else Alert.alert('Vamos la! Quero saber seu nome..')
+            
+        } catch {
+            Alert.alert('Não foi Possivel salvar o seu Nome.')
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -40,7 +62,7 @@ export function UserIdentification() {
                 <View style={styles.content}>
                     <View style={styles.form}>
                         <Text style={styles.emoji}>
-                            {isFilled ?  Header  :  Header }
+                            {isFilled ? Header : Header}
                         </Text>
                         <Text style={styles.tittle}>
                             {titlle}
@@ -48,14 +70,18 @@ export function UserIdentification() {
                         <TextInput
                             placeholder='Digite seu nome'
                             style={[
-                                styles.input, 
+                                styles.input,
                                 (isFocused || isFilled) &&
                                 { borderColor: colors.green }
                             ]}
                             onBlur={handleImputBlur}
                             onFocus={handleImputFocus}
                             onChangeText={handleImputChange} />
-                        <Button title={titlleButton} style={styles.button} way='Confirmed' name={"rodolfo"} />
+                        <Button
+                            titleButton={titlleButton}
+                            style={styles.button}           
+                            onPress={() => setNameUser()}
+                        />
                     </View>
                 </View>
             </KeyboardAvoidingView>
