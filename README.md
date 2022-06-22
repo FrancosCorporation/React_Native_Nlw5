@@ -1,5 +1,8 @@
 # React_Native_Nlw5
 
+*-- Command start --*
+
+Expo Start
 
 *-- Install  expo--*
 
